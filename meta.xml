@@ -1,0 +1,7 @@
+<meta type="lua">
+	<script type="client" src="Gta-menu/utils.lua" />
+	<script type="client" src="Gta-menu/main.lua" />
+	
+	<script type="client" src="race.lua" />
+	
+</meta>
