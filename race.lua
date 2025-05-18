@@ -484,8 +484,6 @@ local function ManageRace()
             end
         end
     elseif(StatRace == 2) then 
-        local pveh = Game.GetCarCharIsUsing(playerChar)
-        Game.FreezeCarPosition(pveh, true)
         Game.PrintWithNumberBig( "NUMBER", 5, 1100, 1 )
         Game.PlayAudioEvent( "FRONTEND_OTHER_RACE_321" )
         Thread.Pause(1000)
@@ -503,7 +501,6 @@ local function ManageRace()
         Thread.Pause(1000)
         Game.PrintBig( "GO", 1500, 1)
         Game.PlayAudioEvent( "FRONTEND_OTHER_RACE_GO" )
-        Game.FreezeCarPosition(pveh, false)
         CheckPassed = 1
         StatRace = 3
     elseif(StatRace == 3) then 
