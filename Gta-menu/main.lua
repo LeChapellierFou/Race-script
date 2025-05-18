@@ -47,45 +47,6 @@ IVMenu = {
         value = {}
     },
 
-    ItemStyle = {
-        boxtitle = {
-            r = 0,
-            g = 0, 
-            b = 100,
-            a = 255
-        },
-
-        title = {
-            r = 255,
-            g = 255, 
-            b = 255,
-            a = 255,
-            font = 3
-        },
-
-        footer = {
-            r = 255,
-            g = 255, 
-            b = 255,
-            a = 255,
-            font = 3
-        },
-
-        background = {
-            r = 0,
-            g = 0, 
-            b = 0,
-            a = 150,
-        },
-
-        boxselected = {
-            r = 255,
-            g = 255, 
-            b = 255,
-            a = 255,
-        }
-    },
-
     ItemType = {
         -- display submenu
         add_submenu = function(text) 
@@ -135,7 +96,7 @@ IVMenu = {
 --  Functions menu      --
 --------------------------
 
-local function Move_menu()
+function Move_menu()
 
 	Game.SetTextFont(0)
 	Game.SetTextScale(0.35, 0.35)
@@ -158,7 +119,7 @@ local function Move_menu()
 	end
 end
 
-local function IVMenu_startup(menuid)
+function IVMenu_startup(menuid)
 
 	local sx, sy = Game.GetScreenResolution()
 	menu_posX = (sx / 2) / sx + offsetToCenterX
@@ -182,7 +143,7 @@ local function IVMenu_startup(menuid)
     Game.SetGameCameraControlsActive(false)
 end
 
-local function IVMenu_shutdown()
+function IVMenu_shutdown()
     IVMenu.ItemCore.isOpen = false
     MenuID = 0
 
@@ -238,7 +199,7 @@ end, true)
 --    Core menu         -- 
 --------------------------
 
-local function IVMenuDraw(items, title, title2)
+function IVMenuDraw(items, title, title2)
     local correction_x
 	--[[ Add this for move menu, use only offsetToCenterX & offsetToCenterY
 		Move_menu()
@@ -252,15 +213,15 @@ local function IVMenuDraw(items, title, title2)
     -- titre
     Game.SetTextScale(0.200000,  0.300000)
     Game.SetTextDropshadow(0, 0, 0, 0, 0)
-    Game.SetTextFont(IVMenu.ItemStyle.title.font)
-    Game.SetTextColour(IVMenu.ItemStyle.title.r, IVMenu.ItemStyle.title.g, IVMenu.ItemStyle.title.b, IVMenu.ItemStyle.title.a)
+    Game.SetTextFont(3)
+    Game.SetTextColour(255, 255, 255, 255)
     Game.DisplayTextWithLiteralString(menu_posX + 0.0500, menu_posY - 0.0760, "STRING", GetStringWithoutSpaces(""..title))    
 
     -- titre submenu
     Game.SetTextScale(0.200000,  0.3500000)
     Game.SetTextDropshadow(0, 0, 0, 0, 0)
-    Game.SetTextFont(IVMenu.ItemStyle.footer.font)
-    Game.SetTextColour(IVMenu.ItemStyle.footer.r, IVMenu.ItemStyle.footer.g, IVMenu.ItemStyle.footer.b, IVMenu.ItemStyle.footer.a)
+    Game.SetTextFont(3)
+    Game.SetTextColour(255, 255, 255, 255)
     Game.DisplayTextWithLiteralString(menu_posX+0.005, menu_posY - 0.0260, "STRING", GetStringWithoutSpaces(""..title2))
 
     -- nombre d'item / item max
@@ -277,7 +238,7 @@ local function IVMenuDraw(items, title, title2)
     end
     Game.DisplayTextWithLiteralString(menu_posX+correction_x, menu_posY - 0.0210, "STRING", ""..item_select.."/"..IVMenu.ItemCore.menu_len)
                     
-    DrawRectLeftTopCenter(menu_posX, menu_posY - 0.1060, 0.2, 0.0770, IVMenu.ItemStyle.boxtitle.r, IVMenu.ItemStyle.boxtitle.g, IVMenu.ItemStyle.boxtitle.b, IVMenu.ItemStyle.boxtitle.a)-- blue
+    DrawRectLeftTopCenter(menu_posX, menu_posY - 0.1060, 0.2, 0.0770, 0, 0, 100, 255)-- blue
     DrawRectLeftTopCenter(menu_posX, menu_posY - 0.0290, 0.2, 0.3/10, 0, 0, 0, 255)
 
     for i=1,IVMenu.ItemCore.menu_len,1 do
@@ -285,7 +246,7 @@ local function IVMenuDraw(items, title, title2)
             local item_text = items[i]
 
             if(IsCursorInAreaLeftTopCenter(menu_posX, scroll_pos_y+0.3/10*(i-1), 0.2, 0.3/10) and not InError and typeM[i] ~= ItemType.TitleI) then
-                DrawRectLeftTopCenter(menu_posX, scroll_pos_y+0.3/10*(i-1), 0.2, 0.3/10, IVMenu.ItemStyle.boxselected.r, IVMenu.ItemStyle.boxselected.g, IVMenu.ItemStyle.boxselected.b, IVMenu.ItemStyle.boxselected.a)
+                DrawRectLeftTopCenter(menu_posX, scroll_pos_y+0.3/10*(i-1), 0.2, 0.3/10, 255, 255, 255, 255)
                 item_select = i
                 Game.SetTextColour(0, 0, 0, 255)
 
@@ -311,7 +272,7 @@ local function IVMenuDraw(items, title, title2)
                     end
                 end
             else
-                DrawRectLeftTopCenter(menu_posX, scroll_pos_y+0.3/10*(i-1), 0.2, 0.3/10, IVMenu.ItemStyle.background.r, IVMenu.ItemStyle.background.g, IVMenu.ItemStyle.background.b, IVMenu.ItemStyle.background.a)
+                DrawRectLeftTopCenter(menu_posX, scroll_pos_y+0.3/10*(i-1), 0.2, 0.3/10, 0, 0, 0, 150)
                 Game.SetTextColour(255, 255, 255, 255)
             end
             
